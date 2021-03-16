@@ -8,6 +8,10 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.6/con
 contract Fabrica is ERC20, Ownable {
     
     // basic constructor, the token will have "fabrica" as name and "FAB" as symbol.
-    constructor() ERC20("fabrica", "FAB") Ownable() public { }
+    // an initial supply of tokens will be created and sent to the deployer's address.
+    // warning: if you want the initial supply to be 1 FAB token, you need to write (1* 10**18)
+    constructor(uint256 initialSupply) ERC20("fabrica", "FAB") Ownable() public { 
+        _mint(msg.sender, initialSupply);
+    }
     
 }
