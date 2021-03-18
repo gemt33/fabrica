@@ -1,0 +1,28 @@
+.sidebar {
+    background-color: #2a2b5f;
+    width: 100px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar__logo {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: green;
+}
+
+.sidebar__bottom {
+    margin-bottom: 1rem;
+}
+
+.sidebar__bottom > hr{
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.sidebar__icon {
+    color: grey
+}
