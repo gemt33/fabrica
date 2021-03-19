@@ -1,0 +1,53 @@
+.dashboard {
+    background-color: #1a2639;
+}
+
+.dashboard__header {
+    margin-top: 4rem;
+    margin-bottom: 2.5rem;
+}
+
+.dashboard__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.dashboard__headerRight {
+    display: flex;
+    align-items: center;
+}
+
+.dashboard__btnAdd {
+    margin-left: 1rem !important;
+}
+
+.dashboard .MuiSelect-select.MuiSelect-select, .dashboard .MuiSelect-icon {
+    color: white;
+}
+
+.dashboard .MuiPaper-elevation1 {
+    padding: .8rem 1rem;
+    background-color: #2b384d;
+}
+
+.dashboard__text {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #bebebe;
+}
+
+.dashboard__textBold {
+    margin-top: 8px;
+    color: white;
+    font-weight: bold;
+}
+
+.dashboard__textborder {
+    background-color: #566172;
+    /* background-color: #1b3c6e; */
+    padding: 8px;
+    text-align: center;
+    color: #74af3c;
+}
