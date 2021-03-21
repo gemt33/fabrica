@@ -1,5 +1,5 @@
 /* ---------README------------
-TODO: fix the error on line 72
+TODO: fix the error on line 76
 ----------------------------*/
 
 pragma solidity ^0.6.6; // patrick advises to use this version. This is a stable and well documented one.
@@ -11,8 +11,18 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.6/con
 // Contract for the FAB token (add ownable later)
 contract Fabrica is ERC20 {
     
+    
+    // basic constructor, the token will have "fabrica" as name and "FAB" as symbol.
+    // an initial supply of tokens will be created and sent to the deployer's address.
+    // warning: if you want the initial supply to be 1 FAB token, you need to write (1* 10**18)
+    constructor(uint256 initialSupply) ERC20("fabrica", "FAB") public { // add the Ownable() constructot later
+        _mint(msg.sender, initialSupply * 10**18);
+    }
+    
+    
     // each post has a unique id, this id needs to be incremented after each post
     uint256 public currentId = 0; // can be seen as the number of posts
+    uint256 public postId;
     
     
     // All the data contained in the posts
@@ -51,25 +61,19 @@ contract Fabrica is ERC20 {
     
     // events
     event NewPost(uint256 postId, string postDescription);
-    event NewLike(uint256 postId, address user);
+    event NewLike(uint256 postId, address user, uint256 nblikes);
     event NewUser(address user, string name);
     
-    
-    // basic constructor, the token will have "fabrica" as name and "FAB" as symbol.
-    // an initial supply of tokens will be created and sent to the deployer's address.
-    // warning: if you want the initial supply to be 1 FAB token, you need to write (1* 10**18)
-    constructor(uint256 initialSupply) ERC20("fabrica", "FAB") public { // add the Ownable() constructot later
-        _mint(msg.sender, initialSupply * 10**18);
-    }
+
     
     // the function will create a newPost of type post, insert all the required infos in it, store it on chain and link it with mappings
     // it will return the id of the post and emit the NewPost event.
-    function createPost(string memory _postContent, string memory _postTitle) public returns (uint256) {
+    function createPost(string calldata _postTitle, string calldata _postContent) external returns (uint256) {
         uint256 _postId = currentId;
         currentId++;
         
-        // error to fix here: how to create a new struc Post without initializing the 2 last arrays?
-        Post storage newPost = Post(_postId, msg.sender, _postTitle, _postContent, 0, 0, address[0], address[0]);
+        // Create a Post and filling id, user, title, content, nbUnlocked, nbLikes and 2 empty arrays for whoUnlocked and whoLiked
+        Post storage newPost = Post(_postId, msg.sender, _postTitle, _postContent, 0, 0, new address[], new address[]);
 
         idToPost[_postId] = newPost;
         
